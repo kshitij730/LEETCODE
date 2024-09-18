@@ -1,0 +1,30 @@
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        std::vector<std::string> numsStr;
+        for (int num : nums) {
+            numsStr.push_back(std::to_string(num));
+        }
+        
+        // Custom comparator function to sort in the largest number order
+        auto compare = [](const std::string& x, const std::string& y) {
+            return x + y > y + x;
+        };
+        
+        // Sort the numbers using the custom comparator
+        std::sort(numsStr.begin(), numsStr.end(), compare);
+        
+        // Concatenate all strings to form the largest number
+        std::string largestNum;
+        for (const std::string& numStr : numsStr) {
+            largestNum += numStr;
+        }
+        
+        // Handle edge case where all numbers are zero
+        if (largestNum[0] == '0') {
+            return "0";
+        }
+        
+        return largestNum;
+    }
+};
